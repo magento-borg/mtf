@@ -931,7 +931,7 @@ final class Driver implements DriverInterface
      *
      * @return bool
      */
-    private function isPageReady() {
+    public function isPageReady() {
         $ready = true;
         $driver = $this->driver;
 

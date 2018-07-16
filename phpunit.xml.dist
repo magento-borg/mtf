@@ -35,6 +35,7 @@
         <env name="events_preset" value="base" />
         <env name="rerun_count" value="0" />
         <env name="readiness_failure_threshold" value="3" />
+        <env name="readiness_timeout" value="30" />
     </php>
 
 </phpunit>
