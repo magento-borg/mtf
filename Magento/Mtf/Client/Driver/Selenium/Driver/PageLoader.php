@@ -102,7 +102,13 @@ class PageLoader implements PageLoaderInterface
         }
 
         try {
-            $driver->waitUntil([$this, 'isPageReady']);
+            $pageLoader = $this;
+            $driver->waitUntil(
+                function() use ($pageLoader) {
+                    return $pageLoader->isPageReady();
+                }
+            );
+
             PageLoader::$previousJqAjax = 0;
             PageLoader::$jqAjaxFailures = 0;
             PageLoader::$previousPrototypeAjax = 0;
@@ -168,7 +174,7 @@ class PageLoader implements PageLoaderInterface
      *
      * @return bool
      */
-    private function isPageReady() {
+    public function isPageReady() {
         $ready = true;
         $driver = $this->driver;
 

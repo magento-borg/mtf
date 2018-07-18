@@ -870,7 +870,13 @@ final class Driver implements DriverInterface
         }
 
         try {
-            $this->waitUntil([$this, 'isPageReady']);
+            $fbDriver = $this;
+            $this->waitUntil(
+                function() use ($fbDriver) {
+                    return $fbDriver->isPageReady();
+                }
+            );
+
             Driver::$previousJqAjax = 0;
             Driver::$jqAjaxFailures = 0;
             Driver::$previousPrototypeAjax = 0;
@@ -931,7 +937,7 @@ final class Driver implements DriverInterface
      *
      * @return bool
      */
-    private function isPageReady() {
+    public function isPageReady() {
         $ready = true;
         $driver = $this->driver;
 
